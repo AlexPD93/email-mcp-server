@@ -23,34 +23,47 @@ This [Model Context Protocol (MCP)](https://modelcontextprotocol.io) server tran
 
 ## Installation
 
-### 1. Set up Project Directory
+### 1. Project Navigation
+
+Navigate to your cloned project directory:
+
 ```bash
-mkdir -p ~/mcp-servers/email
 cd ~/mcp-servers/email
-python3 -m venv venv
-source venv/bin/activate
 ```
 
-### 2. Install Dependencies
+### 2. Virtual Environment Setup
+
+Create and activate a virtual environment to keep dependencies isolated:
+
+```bash
+python3 -m venv venv
+source venv/bin/activate  # Windows: .\venv\Scripts\activate
+```
+
+### 3. Install Dependencies
+
 ```bash
 pip install mcp anthropic google-api-python-client google-auth python-dotenv
 ```
 
-### 3. Environment Setup
+### 4. Environment Setup
+
 ```bash
 ANTHROPIC_API_KEY=your_anthropic_key_here
 EMAIL_USER=your_email@gmail.com
 EMAIL_APP_PASSWORD=your_16_char_app_password
 ```
 
-### 4. Google Docs Authentication
+### 5. Google Docs Authentication
+
 1. Place your google-service-account.json in the root folder.
 
 2. Share your Google Doc with the email address found in the client_email field of that JSON.
 
 3. Update DOCUMENT_ID in the script with the ID from your Doc's URL.
 
-### 5. Configuration for Claude Desktop
+### 6. Configuration for Claude Desktop
+
 Add this configuration to your claude_desktop_config.json:
 
 Path (Linux/WSL): ```bash 

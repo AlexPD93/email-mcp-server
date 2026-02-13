@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 import os
 from dotenv import load_dotenv
-from helper_methods import save_draft_via_imap
+from email_server import save_draft_via_imap
 
 # Load environment variables from .env file
 load_dotenv()
@@ -49,7 +49,7 @@ def debug_save_draft():
         print("\n--- Success ---")
         print(result)
 
-    except Exception as e:
+    except Exception as e:  # pylint: disable=broad-exception-caught
         # Catch and print any exceptions that occur
         print("\n--- Error ---")
         print(f"An error occurred: {e}")
@@ -61,7 +61,7 @@ def debug_save_draft():
             "2. Make sure that the 'original_id' is a valid and existing email ID in your INBOX."
         )
         print(
-            "3. Check that the IMAP server settings in 'helper_methods.py' are correct for your email provider."
+            "3. Check that the IMAP server settings in 'email_server.py' are correct for your email provider."
         )
         print(
             "4. Ensure that your email account has IMAP enabled and that app passwords are set up correctly if you are using 2FA."

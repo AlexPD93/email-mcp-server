@@ -6,6 +6,7 @@ import time
 import email
 import email.utils
 import imaplib
+from typing import Any
 from email.header import decode_header
 from email.mime.text import MIMEText
 
@@ -15,7 +16,7 @@ import mcp.server.stdio
 import mcp.types as types
 
 from google.oauth2 import service_account
-from googleapiclient.discovery import build, Resource
+from googleapiclient.discovery import build
 from anthropic import AsyncAnthropic
 
 from dotenv import load_dotenv
@@ -38,6 +39,7 @@ SCOPES = ["https://www.googleapis.com/auth/documents.readonly"]
 
 @server.list_tools()
 async def list_tools() -> list[types.Tool]:
+    """Executes MCP tools for reading emails and creating AI-generated drafts."""
     return [
         types.Tool(
             name="read_emails",
@@ -84,6 +86,7 @@ async def list_tools() -> list[types.Tool]:
 
 @server.call_tool()
 async def call_tool(name: str, arguments: dict) -> list[types.TextContent]:
+    """Executes MCP tools for reading emails and creating AI-generated drafts."""
     email_user = os.environ["EMAIL_USER"]
     email_password = os.environ["EMAIL_APP_PASSWORD"]
 
@@ -96,13 +99,13 @@ async def call_tool(name: str, arguments: dict) -> list[types.TextContent]:
             imap = imaplib.IMAP4_SSL(IMAP_SERVER, IMAP_PORT)
             imap.login(email_user, email_password)
             imap.select(mailbox, readonly=True)
-            status, data = imap.search(None, search_criteria)
+            _, data = imap.search(None, search_criteria)
             email_ids = data[0].split()
             latest_email_ids = email_ids[-limit:][::-1]
 
             results = []
             for email_id in latest_email_ids:
-                status, msg_data = imap.fetch(email_id, "(RFC822)")
+                _, msg_data = imap.fetch(email_id, "(RFC822)")
                 raw_email = msg_data[0][1]
                 msg = email.message_from_bytes(raw_email)
 
@@ -137,7 +140,7 @@ async def call_tool(name: str, arguments: dict) -> list[types.TextContent]:
 
         except imaplib.IMAP4.error as e:
             return [types.TextContent(type="text", text=f"Error reading emails: {e}")]
-        except Exception as e:
+        except Exception as e:  # pylint: disable=broad-exception-caught
             return [
                 types.TextContent(
                     type="text", text=f"An unexpected error occurred: {e}"
@@ -165,7 +168,7 @@ async def call_tool(name: str, arguments: dict) -> list[types.TextContent]:
                 )
             ]
 
-        except Exception as e:
+        except Exception as e:  # pylint: disable=broad-exception-caught
             return [
                 types.TextContent(
                     type="text", text=f"Error generating or saving draft: {e}"
@@ -207,7 +210,9 @@ async def fetch_style_guide() -> str:
     credentials = service_account.Credentials.from_service_account_file(
         SERVICE_ACCOUNT_FILE, scopes=SCOPES
     )
-    service: Resource = build("docs", "v1", credentials=credentials)
+
+    service: Any = build("docs", "v1", credentials=credentials)
+    # pylint: disable=no-member
     doc = service.documents().get(documentId=DOCUMENT_ID).execute()
 
     # Extract all text from the document
@@ -223,6 +228,7 @@ async def fetch_style_guide() -> str:
 
 
 def extract_body(msg):
+    """Parses a MIME message to extract and decode the plain text or HTML body."""
 
     body_content = ""
     html_content = ""
@@ -244,7 +250,7 @@ def extract_body(msg):
                     body_content = part.get_payload(decode=True).decode(
                         charset or "utf-8", errors="ignore"
                     )
-                except Exception:
+                except Exception:  # pylint: disable=broad-exception-caught
                     continue
             elif content_type == "text/html":
                 try:
@@ -252,7 +258,7 @@ def extract_body(msg):
                     html_content = part.get_payload(decode=True).decode(
                         charset or "utf-8", errors="ignore"
                     )
-                except Exception:
+                except Exception:  # pylint: disable=broad-exception-caught
                     continue
         return body_content or html_content
     else:
@@ -263,7 +269,7 @@ def extract_body(msg):
                 body_content = msg.get_payload(decode=True).decode(
                     charset or "utf-8", errors="ignore"
                 )
-            except Exception:
+            except Exception:  # pylint: disable=broad-exception-caught
                 return "Could not decode message body."
     return "No readable body found."
 
@@ -329,6 +335,7 @@ def save_draft_via_imap(
 
 
 async def main():
+    """Runs the MCP server using stdio as the communication transport."""
     async with mcp.server.stdio.stdio_server() as (read_stream, write_stream):
         await server.run(
             read_stream, write_stream, server.create_initialization_options()

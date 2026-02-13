@@ -51,9 +51,9 @@ ANTHROPIC_API_KEY=your_anthropic_key_here
 PASSWORD=your_16_char_app_password
 ```
 
-## 5. Google Cloud & Style Guide Setup
+### 5. Google Cloud & Style Guide Setup
 
-### A. Create the Service Account
+#### A. Create the Service Account
 1.  Go to the [Google Cloud Console](https://console.cloud.google.com/).
 2.  **Enable the Google Docs API**: Search for "Google Docs API" in the library and click **Enable**.
 3.  **Navigate to Credentials**: Go to `APIs & Services` > `Credentials`.
@@ -65,7 +65,7 @@ PASSWORD=your_16_char_app_password
     * Select **JSON** and click **Create**.
 6.  **Rename & Move**: Rename the downloaded file to `google-service-account.json` and place it in your project root directory.
 
-### B. Setup the Style Guide
+#### B. Setup the Style Guide
 1.  **Create the Doc**: Open a new Google Doc and write out your specific email tone, formatting rules, or brand style preferences.
 2.  **Copy the Document ID**: Look at the URL in your browser. The ID is the long string of characters between `/d/` and `/edit`.
     * *Example:* `https://docs.google.com/document/d/`**`1A2b3C4d5E6fG7h8I9j0_KLmNoP`**`/edit`

@@ -2,8 +2,6 @@
 
 This [Model Context Protocol (MCP)](https://modelcontextprotocol.io) server transforms Claude Desktop into an intelligent email assistant. Unlike basic email scripts, this server allows Claude to read your inbox, fetch a specific style guide from a live Google Doc, and generate context-aware draft replies that match your personal or brand voice.
 
-[Image of Model Context Protocol architecture diagram]
-
 ## How it Works
 1. **Read**: Claude uses the `read_emails` tool to fetch messages via IMAP.
 2. **Consult**: The server fetches your latest writing preferences from a Google Doc Style Guide.
@@ -43,7 +41,7 @@ source venv/bin/activate  # Windows: .\venv\Scripts\activate
 ### 3. Install Dependencies
 
 ```bash
-pip install mcp anthropic google-api-python-client google-auth python-dotenv
+pip install -r requirements.txt 
 ```
 
 ### 4. Environment Setup

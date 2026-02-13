@@ -33,9 +33,18 @@ cd ~/mcp-servers/email
 
 Create and activate a virtual environment to keep dependencies isolated:
 
+- macOS/Linux:
+
 ```bash
 python3 -m venv venv
-source venv/bin/activate  # Windows: .\venv\Scripts\activate
+source venv/bin/activate
+```
+
+- Windows:
+
+```bash
+python3 -m venv venv
+.\venv\Scripts\activate
 ```
 
 ### 3. Install Dependencies

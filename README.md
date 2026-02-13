@@ -50,8 +50,7 @@ pip install mcp anthropic google-api-python-client google-auth python-dotenv
 
 ```bash
 ANTHROPIC_API_KEY=your_anthropic_key_here
-EMAIL_USER=your_email@gmail.com
-EMAIL_APP_PASSWORD=your_16_char_app_password
+PASSWORD=your_16_char_app_password
 ```
 
 ### 5. Google Docs Authentication

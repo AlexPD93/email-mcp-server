@@ -89,6 +89,4 @@ Path (Mac): ```bash
 ### Usage Examples
 Once configured and Claude Desktop is restarted, you can ask:
 
-"Check my inbox for any unread emails from the last 24 hours."
-
-"Read email ID 12 and generate a draft reply using my style guide."
+"Get my last unread email and create a draft reply using the style guide provided."

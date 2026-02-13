@@ -81,10 +81,8 @@ Path (Mac): ```bash
         "/PATH/TO/YOUR/PROJECT/email_server.py"
       ],
       "env": {
-        "ANTHROPIC_API_KEY": "your_anthropic_key_here",
         "EMAIL_USER": "your_gmail_address@gmail.com",
         "EMAIL_APP_PASSWORD": "your_16_char_app_password",
-        "DOCUMENT_ID": "your_google_doc_id_here"
       }
     }
   }

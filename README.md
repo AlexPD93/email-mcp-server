@@ -51,13 +51,28 @@ ANTHROPIC_API_KEY=your_anthropic_key_here
 PASSWORD=your_16_char_app_password
 ```
 
-### 5. Google Docs Authentication
+## 5. Google Cloud & Style Guide Setup
 
-1. Place your google-service-account.json in the root folder.
+### A. Create the Service Account
+1.  Go to the [Google Cloud Console](https://console.cloud.google.com/).
+2.  **Enable the Google Docs API**: Search for "Google Docs API" in the library and click **Enable**.
+3.  **Navigate to Credentials**: Go to `APIs & Services` > `Credentials`.
+4.  **Create Credentials**: Click `Create Credentials` > `Service Account`.
+5.  **Generate JSON Key**:
+    * Once the account is created, click on its email address to open the settings.
+    * Go to the **Keys** tab.
+    * Click **Add Key** > **Create New Key**.
+    * Select **JSON** and click **Create**.
+6.  **Rename & Move**: Rename the downloaded file to `google-service-account.json` and place it in your project root directory.
 
-2. Share your Google Doc with the email address found in the client_email field of that JSON.
-
-3. Update DOCUMENT_ID in the script with the ID from your Doc's URL.
+### B. Setup the Style Guide
+1.  **Create the Doc**: Open a new Google Doc and write out your specific email tone, formatting rules, or brand style preferences.
+2.  **Copy the Document ID**: Look at the URL in your browser. The ID is the long string of characters between `/d/` and `/edit`.
+    * *Example:* `https://docs.google.com/document/d/`**`1A2b3C4d5E6fG7h8I9j0_KLmNoP`**`/edit`
+3.  **Grant Access**: 
+    * Open your `google-service-account.json` and copy the `client_email` address.
+    * In your Style Guide Google Doc, click **Share**.
+    * Paste the `client_email` and grant it **Viewer** access.
 
 ### 6. Configuration for Claude Desktop
 

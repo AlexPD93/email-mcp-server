@@ -114,3 +114,10 @@ Path (Mac): ```bash
 Once configured and Claude Desktop is restarted, you can ask:
 
 "Get my last unread email and create a draft reply using the style guide provided."
+
+<img width="858" height="465" alt="image" src="https://github.com/user-attachments/assets/50b0f58d-8c03-4d0b-a65f-0a347a646f0c" />
+
+<img width="1415" height="539" alt="image" src="https://github.com/user-attachments/assets/9bfabdc4-2e0e-48b8-93c9-b67a15a57011" />
+
+
+

@@ -1,4 +1,4 @@
-# MCP Intelligent Email Agent
+# MCP Email Agent with Claude Desktop
 
 This [Model Context Protocol (MCP)](https://modelcontextprotocol.io) server transforms Claude Desktop into an intelligent email assistant. Unlike basic email scripts, this server allows Claude to read your inbox, fetch a specific style guide from a live Google Doc, and generate context-aware draft replies that match your personal or brand voice.
 
